@@ -9,7 +9,13 @@ def ssh_con():
     time.sleep(5)
     client = paramiko.SSHClient()
     client.load_system_host_keys()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect('192.168.2.1', username='root', password='Pr0L1@nt')
+
+    if client.get_transport() is not None:
+        print("Connected")
+    else:
+        print("Not Connected")
 
     for i in range(2, 256):
         time.sleep(1)
